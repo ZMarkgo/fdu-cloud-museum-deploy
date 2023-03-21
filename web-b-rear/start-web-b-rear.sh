@@ -12,5 +12,5 @@ workDir="${CURDIR}"
 jarFileName="rear-0.0.1.jar"
 runjarLogPath="script/log/runjar.out"
 
-cd script/runjar.sh
+cd ../script/runjar.sh
 ./runjar.sh ${workDir} ${jarFileName} ${runjarLogPath}
