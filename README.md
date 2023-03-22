@@ -2,8 +2,38 @@
 
 复旦云博，生产环境部署
 
+## web-a
+
+```Shell
+cd /home/david/develop/mynerfstudio/nerfstudio/viewer/app/
+yarn install
+yarn start 
+
+cd /home/david/develop/mynerfstudio
+conda activate nerfstudio
+ns-train nerfacto  --data data/6 --load-dir outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models --viewer.start-train False --pipeline.model.predict-normals True
+
+nohup ns-train nerfacto \
+--data data/6 \
+--load-dir outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models \
+--viewer.start-train False \
+--pipeline.model.predict-normals True \
+> show-model-sh.out 2>&1 &
+```
+
 ## web-b
-/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy
+
+```shell
+cd /home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy
+chmod +x ./start-web-b.sh
+./start-web-b.sh  
+
+cd /home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/web-b-rear
+
+cd web-b-rear
+nohup java -jar rear-0.0.1.jar > ../script/log/runjar.out 2>&1 &
+/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/script/log
+```
 
 前端：使用docker部署nginx
 - 端口映射：8085->80
@@ -33,5 +63,4 @@ Query OK, 0 rows affected (0.01 sec)
 
 mysql> quit
 Bye
-
 ```
