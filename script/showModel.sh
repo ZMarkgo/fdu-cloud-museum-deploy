@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env zsh
 
 # 定义处理 SIGTERM 信号的函数
 function on_sigterm() {
@@ -9,24 +9,18 @@ function on_sigterm() {
 # 注册 SIGTERM 信号处理函数
 trap on_sigterm SIGTERM
 
-# 获取脚本运行的路径
-DIRNAME=$0
-if [ "${DIRNAME:0:1}" = "/" ];then
-    CURDIR=`dirname $DIRNAME`
-else
-    CURDIR="`pwd`"/"`dirname $DIRNAME`"
-fi
 # 设置日志路径
 logPath="/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/log/show_model_sh.out"
-
+# 设置工作目录
 work_dir="/home/david/develop/mynerfstudio"
 # ns-train的训练参数
-data_path=$1 # "data/6"
-load_dir=$2  # "outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models"
-
-conda activate nerfstudio
+data_path="data/6" # $1 # "data/6"
+load_dir="outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models" # $2  # "outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models"
 
 cd ${work_dir}
+source activate
+conda activate nerfstudio
+echo $?
 nohup ns-train nerfacto \
 --data ${data_path} \
 --load-dir ${load_dir} \
