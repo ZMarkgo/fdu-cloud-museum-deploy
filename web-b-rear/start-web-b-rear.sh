@@ -9,8 +9,10 @@ else
     CURDIR="`pwd`"/"`dirname $DIRNAME`"
 fi
 workDir="${CURDIR}"
+echo ${workDir}
 jarFileName="rear-0.0.1.jar"
-runjarLogPath="script/log/runjar.out"
+runjarLogPath="../script/log/runjar.out"
 
-cd ../script/runjar.sh
+cd ../script
+chmod +x ./runjar.sh
 ./runjar.sh ${workDir} ${jarFileName} ${runjarLogPath}

@@ -3,6 +3,7 @@
 复旦云博，生产环境部署
 
 ## web-b
+/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy
 
 前端：使用docker部署nginx
 - 端口映射：8085->80
