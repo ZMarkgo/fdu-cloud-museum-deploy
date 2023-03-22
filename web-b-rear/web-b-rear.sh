@@ -1,7 +1,8 @@
 #!/bin/bash
-#这里可替换为你自己的执行程序，其他代码无需更改
+
+#设置jar包名称和日志路径
 APP_NAME="rear-0.0.1.jar"
-LOG_FILE="runjar.out"
+LOG_FILE="/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/log/runjar.out"
 #使用说明，用来提示输入参数
 usage() {
     echo "Usage: ./web-b-rear.sh [start|stop|restart|status]"
@@ -23,10 +24,10 @@ is_exist(){
 start(){
   is_exist
   if [ $? -eq "0" ]; then
-    echo "${APP_NAME} is already running. PID=${pid} ."
+    echo ">>> ${APP_NAME} is already running. PID=${pid} ."
   else
     nohup java -jar $APP_NAME > $LOG_FILE 2>&1 &
-    echo "${APP_NAME} start successed PID=$!"
+    echo ">>> ${APP_NAME} start successed PID=$!"
   fi
 }
  
@@ -36,7 +37,7 @@ stop(){
   if [ $? -eq "0" ]; then
     kill -9 $pid
   else
-    echo "${APP_NAME} is not running"
+    echo ">>> ${APP_NAME} is not running"
   fi  
 }
  
@@ -44,9 +45,9 @@ stop(){
 status(){
   is_exist
   if [ $? -eq "0" ]; then
-    echo "${APP_NAME} is running. Pid is ${pid}"
+    echo ">>> ${APP_NAME} is running. Pid is ${pid}"
   else
-    echo "${APP_NAME} is NOT running."
+    echo ">>> ${APP_NAME} is NOT running."
   fi
 }
  

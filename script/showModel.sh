@@ -17,12 +17,14 @@ else
     CURDIR="`pwd`"/"`dirname $DIRNAME`"
 fi
 # 设置日志路径
-logPath="${CURDIR}/log/show_model_sh.out"
+logPath="/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/log/show_model_sh.out"
 
 work_dir="/home/david/develop/mynerfstudio"
 # ns-train的训练参数
 data_path=$1 # "data/6"
 load_dir=$2  # "outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models"
+
+conda activate nerfstudio
 
 cd ${work_dir}
 nohup ns-train nerfacto \
