@@ -8,6 +8,7 @@
 前端：使用docker部署nginx
 - 端口映射：8085->80
 - http://10.177.35.97:8085
+- container：fcm-web-b-front
 
 后端：使用java运行jar包
 - http://10.177.35.97:8070
