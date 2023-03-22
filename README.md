@@ -2,6 +2,10 @@
 
 复旦云博，生产环境部署
 
+3D模型渲染：http://10.177.35.97:4000/
+
+http://10.177.35.97:8085
+
 ## web-a
 
 ```Shell
@@ -12,6 +16,10 @@ yarn start
 cd /home/david/develop/mynerfstudio
 conda activate nerfstudio
 ns-train nerfacto  --data data/6 --load-dir outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models --viewer.start-train False --pipeline.model.predict-normals True
+
+nohup ns-train nerfacto  --data data/6 --load-dir outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models --viewer.start-train False --pipeline.model.predict-normals True > /home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/log/show_model_sh.out 2>&1 &
+
+ssh -L 7007:localhost:7007 david@10.177.35.97
 
 nohup ns-train nerfacto \
 --data data/6 \
@@ -28,10 +36,16 @@ cd /home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy
 chmod +x ./start-web-b.sh
 ./start-web-b.sh  
 
-cd /home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/web-b-rear
+# 更新web-b前端
 
-cd web-b-rear
-nohup java -jar rear-0.0.1.jar > ../script/log/runjar.out 2>&1 &
+docker container ls
+cd web-b-front
+docker cp dist e124d9374fda:/usr/share/nginx/html/dist  
+docker restart e124d9374fda 
+
+cd /home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/web-b-rear
+setopt nohup
+nohup java -jar rear-0.0.1.jar > ../log/runjar.out 2>&1 &
 /home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/script/log
 ```
 
