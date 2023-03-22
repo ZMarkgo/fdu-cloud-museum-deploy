@@ -4,6 +4,8 @@
 
 # 设置访问的url
 URL="http://10.177.35.97:8085"
+# 设置脚本运行输出文件
+run_docker_out="../log/run_docker.out"
 # 设置运行前端的nginx容器名称
 CONTAINER_NAME="fcm-web-b-front"
 # 获取容器ID
@@ -67,8 +69,8 @@ status(){
 
 #更新容器中的dist文件夹和nginx.conf文件
 update_files(){
-	docker cp dist ${container_id}:/usr/share/nginx/html/dist
-  docker cp nginx.conf ${container_id}:/etc/nginx/nginx.conf
+	docker cp dist ${container_id}:/usr/share/nginx/html/dist > ${run_docker_out}
+  docker cp nginx.conf ${container_id}:/etc/nginx/nginx.conf > ${run_docker_out}
   echo ">>> 容器 $CONTAINER_NAME 内的文件已更新"
 }
  

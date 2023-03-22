@@ -34,7 +34,7 @@ stop(){
 	./web-b-front.sh stop
 }
 
-stop(){
+status(){
 	cd web-b-rear
 	chmod +x ./web-b-rear.sh
 	./web-b-rear.sh status
