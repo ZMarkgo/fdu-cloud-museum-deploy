@@ -56,7 +56,7 @@ restart(){
 
 update(){
 	git fetch origin
-	git reset --hard origin/master
+	git reset --hard origin/main
 }
 
 #根据输入参数，选择执行对应方法，不输入则执行使用说明
