@@ -3,4 +3,4 @@
 
 jarFileName="rear-0.0.1.jar"
 runjarLogPath="../script/log/runjar.out"
-nohup java -jar ${jarFileName} > ${runjarOutPath} 2>&1 &
+nohup java -jar ${jarFileName} > ${runjarLogPath} 2>&1 &
