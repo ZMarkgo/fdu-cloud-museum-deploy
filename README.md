@@ -9,10 +9,14 @@ http://10.177.35.97:8085
 ## web-a
 
 ```Shell
+ps -ef | grep python
+
+#运行web-a
 cd /home/david/develop/mynerfstudio/nerfstudio/viewer/app/
 yarn install
 yarn start 
 
+#渲染已有模型
 cd /home/david/develop/mynerfstudio
 conda activate nerfstudio
 ns-train nerfacto  --data data/6 --load-dir outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models --viewer.start-train False --pipeline.model.predict-normals True
@@ -32,21 +36,11 @@ nohup ns-train nerfacto \
 ## web-b
 
 ```shell
+# web-b运行脚本
 cd /home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy
-chmod +x ./start-web-b.sh
-./start-web-b.sh  
+chmod +x ./web-b.sh
+./web-b.sh  
 
-# 更新web-b前端
-
-docker container ls
-cd web-b-front
-docker cp dist e124d9374fda:/usr/share/nginx/html/dist  
-docker restart e124d9374fda 
-
-cd /home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/web-b-rear
-setopt nohup
-nohup java -jar rear-0.0.1.jar > ../log/runjar.out 2>&1 &
-/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/script/log
 ```
 
 前端：使用docker部署nginx
