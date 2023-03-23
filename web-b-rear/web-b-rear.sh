@@ -24,10 +24,10 @@ is_exist(){
 start(){
   is_exist
   if [ $? -eq "0" ]; then
-    echo ">>> ${APP_NAME} is already running. PID=${pid} ."
+    echo ">>> ${APP_NAME} 正在运行，PID=${pid}，不需要启动"
   else
     nohup java -jar $APP_NAME > $LOG_FILE 2>&1 &
-    echo ">>> ${APP_NAME} start successed PID=$!"
+    echo ">>> ${APP_NAME} 启动成功 PID=$!"
   fi
 }
  
@@ -36,8 +36,9 @@ stop(){
   is_exist
   if [ $? -eq "0" ]; then
     kill -9 $pid
+    echo ">>> ${APP_NAME} 停止运行成功"
   else
-    echo ">>> ${APP_NAME} is not running"
+    echo ">>> ${APP_NAME} 没有在运行，不需要停止"
   fi  
 }
  
@@ -45,9 +46,9 @@ stop(){
 status(){
   is_exist
   if [ $? -eq "0" ]; then
-    echo ">>> ${APP_NAME} is running. Pid is ${pid}"
+    echo ">>> ${APP_NAME} 正在运行，Pid=${pid}"
   else
-    echo ">>> ${APP_NAME} is NOT running."
+    echo ">>> ${APP_NAME} 没有在运行"
   fi
 }
  

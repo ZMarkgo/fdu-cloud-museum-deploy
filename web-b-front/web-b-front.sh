@@ -52,7 +52,7 @@ stop(){
     docker container stop ${container_id}
     echo ">>> 容器 ${CONTAINER_NAME} 停止运行成功"
   else
-    echo ">>> 容器 ${CONTAINER_NAME} 未运行"
+    echo ">>> 容器 ${CONTAINER_NAME} 未运行，不需要停止"
   fi  
 }
  
