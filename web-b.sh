@@ -13,6 +13,12 @@ usage() {
 }
 
 start(){
+	echo ">>> web-a 前端通过yarn启动"
+	chmod +x ./web-a.sh
+	./web-a.sh
+
+	echo ">>> web-a 后端通过web-b后端启动"
+
 	echo ">>> web-b 后端通过jar包启动"
 	cd web-b-rear
 	chmod +x ./web-b-rear.sh
