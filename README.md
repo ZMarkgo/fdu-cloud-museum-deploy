@@ -36,10 +36,13 @@ nohup ns-train nerfacto \
 ## web-b
 
 ```shell
+# 打包项目
+npm run build
+package
 # web-b运行脚本
 cd /home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy
 chmod +x ./web-b.sh
-./web-b.sh  
+./web-b.sh
 
 ```
 
