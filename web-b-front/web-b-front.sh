@@ -113,7 +113,7 @@ case "$1" in
   "restart")
     restart
     ;;
-  "build_and_run")
+  "update")
     build_and_run
     ;;
   *)
