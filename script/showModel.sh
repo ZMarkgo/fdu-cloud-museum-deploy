@@ -14,8 +14,8 @@ logPath="/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/log/show_m
 # 设置工作目录
 work_dir="/home/david/develop/mynerfstudio"
 # ns-train的训练参数
-data_path="data/6" # $1 # "data/6"
-load_dir="outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models" # $2  # "outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models"
+data_path=$1 # "data/6"
+load_dir=$2  # "outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models"
 
 cd ${work_dir}
 source activate
