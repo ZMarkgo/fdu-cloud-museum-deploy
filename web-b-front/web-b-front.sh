@@ -6,7 +6,15 @@
 URL="http://10.177.35.97:8085"
 # 设置脚本运行输出文件
 run_docker_out="../log/run_docker.out"
-# 设置运行前端的nginx容器名称
+
+# 容器暴露的端口
+PORT="80"
+# 容器映射到本机的端口
+MAPPING_PORT="8085"
+
+# Docker镜像名称
+IMAGE_NAME="fcm-web-b-nginx"
+# nginx容器名称
 CONTAINER_NAME="fcm-web-b-front"
 # 获取容器ID
 container_id=$(docker ps -aqf "name=$CONTAINER_NAME")
@@ -39,7 +47,7 @@ start(){
   if [ $? -eq "1" ]; then
     echo ">>> 容器 ${CONTAINER_NAME} 已经在运行中，不需要启动"
   else
-    docker container start ${container_id}
+    docker container start ${container_id} > $run_docker_out
     echo ">>> 容器 ${CONTAINER_NAME} 启动成功"
   fi
   echo ">>> 可以尝试访问：${URL}"
@@ -49,7 +57,7 @@ start(){
 stop(){
   is_running
   if [ $? -eq "1" ]; then
-    docker container stop ${container_id}
+    docker stop $CONTAINER_NAME > $run_docker_out
     echo ">>> 容器 ${CONTAINER_NAME} 停止运行成功"
   else
     echo ">>> 容器 ${CONTAINER_NAME} 未运行，不需要停止"
@@ -67,16 +75,26 @@ status(){
   fi
 }
 
-#更新容器中的dist文件夹和nginx.conf文件
-update_files(){
-	docker cp dist ${container_id}:/usr/share/nginx/html > ${run_docker_out}
-  docker cp nginx.conf ${container_id}:/etc/nginx/nginx.conf > ${run_docker_out}
-  echo ">>> 容器 $CONTAINER_NAME 内的文件已更新"
+#更新docker容器和docker镜像并运行
+update(){
+	# 停止并删除旧的Docker容器
+  stop
+  docker rm $CONTAINER_NAME > $run_docker_out
+  # 删除旧的Docker镜像
+  docker rmi $IMAGE_NAME > $run_docker_out
+  # 构建新的Docker镜像
+  docker build -t $IMAGE_NAME . > $run_docker_out
+  # 运行新的Docker容器
+  docker run -d -p $MAPPING_PORT:$PORT --name $CONTAINER_NAME $IMAGE_NAME > $run_docker_out
+  echo ">>> web-b 前端更新成功"
+  echo ">>> - image_name: ${IMAGE_NAME}"
+  echo ">>> - container_name: ${CONTAINER_NAME}"
+  echo ">>> 可以尝试访问：${URL}"
 }
  
 #重启
 restart(){
-  docker restart ${container_id}
+  docker restart ${container_id} > $run_docker_out
 	echo ">>> 容器 $CONTAINER_NAME 已重新启动"
   echo ">>> 可以尝试访问：${URL}"
 }
@@ -96,8 +114,7 @@ case "$1" in
     restart
     ;;
   "update")
-    update_files
-		restart
+    update
     ;;
   *)
     usage
