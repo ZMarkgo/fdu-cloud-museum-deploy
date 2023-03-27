@@ -69,7 +69,7 @@ status(){
 
 #更新容器中的dist文件夹和nginx.conf文件
 update_files(){
-	docker cp dist ${container_id}:/usr/share/nginx/html/dist > ${run_docker_out}
+	docker cp dist ${container_id}:/usr/share/nginx/html > ${run_docker_out}
   docker cp nginx.conf ${container_id}:/etc/nginx/nginx.conf > ${run_docker_out}
   echo ">>> 容器 $CONTAINER_NAME 内的文件已更新"
 }
