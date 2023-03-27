@@ -76,7 +76,7 @@ status(){
 }
 
 #更新docker容器和docker镜像并运行
-update(){
+build_and_run(){
 	# 停止并删除旧的Docker容器
   stop
   docker rm $CONTAINER_NAME > $run_docker_out
@@ -102,7 +102,7 @@ restart(){
 #根据输入参数，选择执行对应方法，不输入则执行使用说明
 case "$1" in
   "start")
-    start
+    build_and_run
     ;;
   "stop")
     stop
@@ -113,8 +113,8 @@ case "$1" in
   "restart")
     restart
     ;;
-  "update")
-    update
+  "build_and_run")
+    build_and_run
     ;;
   *)
     usage
