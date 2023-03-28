@@ -21,6 +21,9 @@ cd /home/david/develop/mynerfstudio
 conda activate nerfstudio
 ns-train nerfacto  --data data/6 --load-dir outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models --viewer.start-train False --pipeline.model.predict-normals True
 
+#驴背诗思
+ns-train nerfacto  --data data/ala/statue --load-dir outputs/statue/nerfacto/2023-03-20_173137/nerfstudio_models --viewer.start-train False 
+
 nohup ns-train nerfacto  --data data/6 --load-dir outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models --viewer.start-train False --pipeline.model.predict-normals True > /home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/log/show_model_sh.out 2>&1 &
 
 ssh -L 7007:localhost:7007 david@10.177.35.97
