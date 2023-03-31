@@ -7,7 +7,7 @@ function on_sigterm() {
 }
 
 # 注册 SIGTERM 信号处理函数
-trap on_sigterm SIGTERM
+# trap on_sigterm SIGTERM
 
 time1=$(date)
 echo ">>> Time:${time1}" >> ${sh_out}
@@ -34,7 +34,7 @@ else
   echo "成功杀死进程 $PID，释放端口 $PORT" >> ${sh_out}
 fi
 
-sleep 3  #等3秒后执行下一条
+# sleep 3  #等3秒后执行下一条
 
 cd ${work_dir}
 source activate
@@ -60,5 +60,5 @@ fi
 # $! 获取到最后一个在后台执行的进程ID
 # $pid 保存该进程ID
 # 使用 wait 命令等待该进程执行完毕
-trainPID=$!
-wait $trainPID
+# trainPID=$!
+# wait $trainPID
