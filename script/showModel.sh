@@ -17,6 +17,20 @@ work_dir="/home/david/develop/mynerfstudio"
 data_path=$1 # "data/6"
 load_dir=$2  # "outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models"
 
+# 获取输入参数：端口号
+PORT="7007"
+
+# 查找占用端口的进程ID
+PID=$(lsof -t -i:$PORT)
+
+if [[ -z $PID ]]; then
+  echo "端口 $PORT 没有被占用"
+else
+  # 结束占用端口的进程
+  kill -9 $PID
+  echo "成功杀死进程 $PID，释放端口 $PORT"
+fi
+
 cd ${work_dir}
 source activate
 conda activate nerfstudio
@@ -25,7 +39,6 @@ nohup ns-train nerfacto \
 --data ${data_path} \
 --load-dir ${load_dir} \
 --viewer.start-train False \
---pipeline.model.predict-normals True \
 > ${logPath} 2>&1 &
 
 # $! 获取到最后一个在后台执行的进程ID

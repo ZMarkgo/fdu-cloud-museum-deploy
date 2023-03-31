@@ -65,9 +65,6 @@ update(){
 	git reset --hard origin/main
 }
 
-#赋予该脚本执行权限
-chmod +x ./web-b.sh
-
 #根据输入参数，选择执行对应方法，不输入则执行使用说明
 case "$1" in
   "start")
