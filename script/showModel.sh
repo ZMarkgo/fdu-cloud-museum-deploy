@@ -39,12 +39,14 @@ conda activate nerfstudio
 echo $? >> ${sh_out}
 
 if [ $data_path = $dockey_data_path ]; then
+  echo "驴哥" >> ${sh_out}
 	nohup ns-train nerfacto \
 	--data ${data_path} \
 	--load-dir ${load_dir} \
 	--viewer.start-train False \
 	> ${ns_train_out} 2>&1 &
 else
+	echo "其他模型" >> ${sh_out}
 	nohup ns-train nerfacto \
 	--data ${data_path} \
 	--load-dir ${load_dir} \
