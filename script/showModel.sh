@@ -9,6 +9,9 @@ function on_sigterm() {
 # 注册 SIGTERM 信号处理函数
 trap on_sigterm SIGTERM
 
+time1=$(date)
+echo ">>> Time:${time1}" >> ${sh_out}
+
 # 设置日志路径
 ns_train_out="/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/log/ns-train.out"
 sh_out="/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/log/show_model_sh.out"
@@ -21,10 +24,8 @@ dockey_data_path="data/ala/statue"
 
 # 获取输入参数：端口号
 PORT="7007"
-
 # 查找占用端口的进程ID
 PID=$(lsof -t -i:$PORT)
-
 if [[ -z $PID ]]; then
   echo "端口 $PORT 没有被占用" >> ${sh_out}
 else
@@ -32,6 +33,8 @@ else
   kill -9 $PID
   echo "成功杀死进程 $PID，释放端口 $PORT" >> ${sh_out}
 fi
+
+sleep 3  #等3秒后执行下一条
 
 cd ${work_dir}
 source activate
