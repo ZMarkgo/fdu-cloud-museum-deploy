@@ -9,9 +9,6 @@ function on_sigterm() {
 # 注册 SIGTERM 信号处理函数
 # trap on_sigterm SIGTERM
 
-time1=$(date)
-echo ">>> Time:${time1}" >> ${sh_out}
-
 # 设置日志路径
 ns_train_out="/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/log/ns-train.out"
 sh_out="/home/david/develop/fdu-cloud-museum/fdu-cloud-museum-deploy/log/show_model_sh.out"
@@ -21,6 +18,10 @@ work_dir="/home/david/develop/mynerfstudio"
 data_path=$1 # "data/6"
 load_dir=$2  # "outputs/6/nerfacto/2023-03-17_233144/nerfstudio_models"
 dockey_data_path="data/ala/statue"
+
+# 时间戳
+time1=$(date)
+echo ">>> Time:${time1}" >> ${sh_out}
 
 # 获取输入参数：端口号
 PORT="7007"
@@ -39,7 +40,6 @@ fi
 cd ${work_dir}
 source activate
 conda activate nerfstudio
-echo $? >> ${sh_out}
 
 if [ $data_path = $dockey_data_path ]; then
   echo "驴哥" >> ${sh_out}
